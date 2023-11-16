@@ -13,8 +13,9 @@ export default async function Profile() {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <h2>{JSON.stringify(user.name)}</h2>
+            <h2>{user.name}</h2>
             <h2>{user.email}</h2>
+            <h2>{user.id}</h2>
             <Link href="/" className="border p-2 text-center rounded">Home</Link>
         </main>
     );

@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export const LoginButton = () => {
   return (
-    <button className="mr-[10px]" onClick={() => signIn()}>
+    <Link className="mr-[10px]" href="/login">
       Sign in
-    </button>
+    </Link>
   );
 };
 
