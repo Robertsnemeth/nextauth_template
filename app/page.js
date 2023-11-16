@@ -11,6 +11,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 export default async function Home() {
 
   const session = await getServerSession(authOptions);
+  const user = session?.user;
   console.log(session);
 
   return (
@@ -19,7 +20,6 @@ export default async function Home() {
       <LogoutButton/>
       <RegisterButton/>
       <ProfileButton/>
-      <h2>{JSON.stringify(session)}</h2>
     </main>
   )
 }
