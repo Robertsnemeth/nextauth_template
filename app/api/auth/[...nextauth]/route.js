@@ -39,6 +39,8 @@ export const authOptions = {
             name: user.name,
             };
         },
+        }),
+    ],
         callbacks: {
             session: ({ session, token }) => {
                 console.log("Session Callback", { session, token });
@@ -62,9 +64,7 @@ export const authOptions = {
                 return token;
                 },
             }
-        }),
-    ],
-    };
+        };
 
     const handler = NextAuth(authOptions);
     export {handler as GET, handler as POST}
