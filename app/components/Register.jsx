@@ -35,7 +35,7 @@ const Register = () => {
                 return;
                 }
         
-                signIn(undefined, { callbackUrl: "/" });
+                signIn(undefined, { callbackUrl: "/profile" });
             } catch (error) {
                 setLoading(false);
                 console.error(error);
