@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-const Login = () => {
+const LoginForm = () => {
 
     const router = useRouter();
 
@@ -72,4 +72,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default LoginForm

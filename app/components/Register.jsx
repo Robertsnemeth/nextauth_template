@@ -1,7 +1,7 @@
 "use client" 
 
 import { signIn } from "next-auth/react";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 const Register = () => {
 
