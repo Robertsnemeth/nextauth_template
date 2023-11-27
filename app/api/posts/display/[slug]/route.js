@@ -1,15 +1,16 @@
-import { prisma } from "../../../lib/prisma";
+import { prisma } from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
+export async function GET(req, { params } ) {
+    const authorId = params.slug;
+    console.log(authorId, "authorId")
     try {
-        const { authorId } = (await req.json());
-        console.log( authorId, "authorId");
         const posts = await prisma.post.findMany({
             where: {
                 authorId
             }
         });
+        console.log(posts, "posts")
         if(!posts) {
             return null
         }

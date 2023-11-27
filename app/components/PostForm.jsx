@@ -19,7 +19,7 @@ async function handleSubmit(e) {
     }
   console.log(postData, "postData")
   try {
-    const res = await fetch("/api/posts", {
+    const res = await fetch("/api/posts/create", {
       method: "POST",
       body: JSON.stringify(postData),
       headers: {
