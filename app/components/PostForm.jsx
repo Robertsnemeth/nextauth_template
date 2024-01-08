@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState } from "react";
+const DISPLAY_URL = "/api/posts/display/";
 
-const PostForm = ({ authorId }) => {
+const PostForm = ({ authorId, getPosts, setUserPosts }) => {
 
 const [ title, setTitle ] = useState("")
 const [ content, setContent ] = useState("")
@@ -26,7 +27,7 @@ async function handleSubmit(e) {
         "Content-Type": "application/json",
       },
     });
-    console.log(res, "res")
+    console.log(res.body, "res")
 
     setLoading(false);
     if (!res.ok) {
@@ -35,7 +36,11 @@ async function handleSubmit(e) {
       return;
     }
     setTitle("");
-    setContent("")
+    setContent("");
+    getPosts(DISPLAY_URL, authorId)
+      .then((posts) => {
+        setUserPosts(posts);
+      });
   } catch (error) {
     setLoading(false);
     setError(true)
@@ -65,7 +70,7 @@ const handleContent = (e) => {
         <label htmlFor="content">Content</label>
         <textarea className="text-black w-[500px] h-[250px]" onChange={handleContent} type="text" name="content" placeholder="Write your post here..." value={content} required/>
       </div>
-      <button className='border border-white text-white rounded w-full h-12 hover:bg-white hover:text-black hover:border-black:'>{loading ? "...loading" : "Add Post"}</button>
+      <button className=' w-1/4 border border-white text-white rounded h-12 hover:bg-white hover:text-black hover:border-black:'>{loading ? "...loading" : "Add Post"}</button>
     </form>
   )
 }

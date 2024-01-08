@@ -1,10 +1,10 @@
-import { prisma } from "../../../lib/prisma";
-import { NextResponse, NextRequest } from "next/server";
+import { prisma } from "./lib/prisma";
+import { NextResponse } from "next/server";
 
-export async function POST(req) {
+export async function createPost(req) {
     console.log("post route")
     try {
-        const { title, content, authorId } = (await req.json());
+        const { title, content, authorId } = req;
         console.log(title, "title", content, "content", authorId, "authorId")
         const userPost = await prisma.post.create({
             data: {
@@ -13,6 +13,7 @@ export async function POST(req) {
                 authorId
             }
         });
+
         return NextResponse.json({
             post: {
                 title: userPost.title,

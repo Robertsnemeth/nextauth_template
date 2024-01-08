@@ -11,7 +11,7 @@ export default async function SignIn() {
 
     return (
         <div className="flex gap-4">
-        {Object.values(providers).map((provider) => (
+        {Object.values(providers).map((provider) => ( provider.name !== "Sign in" &&
             <button onClick={() => handleSignIn(provider.id)} className="border border-white p-2 rounded hover:bg-white hover:text-black" key={provider.name}>{provider.name}</button>
         ))}
         </div>

@@ -21,7 +21,7 @@ const Register = () => {
             password,
         }
         try {
-            const res = await fetch("/api/register", {
+            const res = await fetch("/api/user/register", {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {
