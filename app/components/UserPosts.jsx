@@ -1,36 +1,25 @@
 "use client"
 
 import { unstable_noStore } from "next/cache";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { ColorRing } from 'react-loader-spinner';
-// import useSWR from 'swr';
 import Post from "./Post";
 const DISPLAY_URL = "/api/posts/display/";
 const DELETE_URL = "/api/posts/delete/"
-import { getPosts } from '../actions/getPosts';
 
-function UserPosts ( { authorId, userPosts, getPosts, setUserPosts } ) {
+function UserPosts ( { 
+  authorId, 
+  userPosts, 
+  getPosts, 
+  setUserPosts, 
+  setUpdate, 
+  update, 
+  setPostTitle, 
+  setPostContent,
+  setPostId } ) {
   unstable_noStore();
 
   const [ isLoading, setIsLoading ] = useState(true);
-  
-  // const getPosts = async () => {
-  //   const res = await fetch(`${DISPLAY_URL}${authorId}`, {
-  //     method: "GET"
-  //   })
-  //   if(!res.ok) {
-  //     console.log("res not ok")
-  //     alert((await res.json()).message)
-  //     return
-  //   }
-  //   const resPosts  = await res.json()
-  //   const posts = resPosts.posts;
-  //   console.log(posts, "userPosts")
-  //   setUserPosts(posts);
-  //   setIsLoading(false)
-  // }
-
-  // const { data, error, isLoading } = useSWR(`${DISPLAY_URL}${authorId}`, getPosts)
 
   useEffect(() => {
     setIsLoading(false);
@@ -52,6 +41,14 @@ function UserPosts ( { authorId, userPosts, getPosts, setUserPosts } ) {
       });
   }
 
+  const handleEdit = (title, content, id) => {
+    setPostTitle(title);
+    setPostContent(content);
+    setPostId(id);
+    setUpdate(!update);
+  }
+
+
   return (
     <div className="flex flex-col items-center w-full gap-4">
       <h1 className="text-3xl">Posts</h1>
@@ -70,7 +67,10 @@ function UserPosts ( { authorId, userPosts, getPosts, setUserPosts } ) {
           return (
             <div key={post.id}>
               <Post post={post} />
+              <div>
               <button className="border border-red-500 text-red-500 rounded p-2 hover:bg-red-500 hover:text-white" onClick={() => handleDelete(post.id)}>Delete</button>
+              <button className="border border-blue-500 text-blue-500 rounded p-2 hover:bg-blue-500 hover:text-white" onClick={() => handleEdit(post.title, post.content, post.id)}>Edit</button>
+              </div>
             </div>
           )
         })

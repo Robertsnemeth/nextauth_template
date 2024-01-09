@@ -11,6 +11,9 @@ export async function GET(req, { params } ) {
         const posts = await prisma.post.findMany({
             where: {
                 authorId
+            },
+            orderBy: {
+                createdAt: "asc"
             }
         });
         console.log(posts, "posts")

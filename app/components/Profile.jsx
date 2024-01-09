@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import PostForm from "../components/PostForm";
 import UserPosts from "../components/UserPosts";
+import PostUpdateForm from "../components/PostUpdateForm";
 import { getPosts } from '../actions/getPosts'
 
 const DISPLAY_URL = "/api/posts/display/";
@@ -10,6 +11,10 @@ const DISPLAY_URL = "/api/posts/display/";
 const Profile = ({ user }) => {
 
     const [ userPosts, setUserPosts ] = useState([]);
+    const [ title, setTitle ] = useState("");
+    const [ content, setContent ] = useState("");
+    const [ id, setId ] = useState([]); 
+    const [ update, setUpdate ] = useState(false);
 
     const userId = user.id;
 
@@ -32,7 +37,27 @@ const Profile = ({ user }) => {
                 <h2>{user.email}</h2>
                 <h2>{userId}</h2>
             </div>
-            <UserPosts authorId={userId} userPosts={userPosts} getPosts={getPosts} setUserPosts={setUserPosts}/>
+            {update ? 
+                <PostUpdateForm 
+                    authorId={userId} 
+                    getPosts={getPosts} 
+                    setUserPosts={setUserPosts} 
+                    postTitle={title} 
+                    postContent={content}
+                    postId={id}
+                    setUpdate={setUpdate} 
+                    update={update}/> 
+                :             
+                <UserPosts 
+                    authorId={userId} 
+                    userPosts={userPosts} 
+                    getPosts={getPosts} 
+                    setUserPosts={setUserPosts} 
+                    setUpdate={setUpdate} 
+                    update={update}
+                    setPostTitle={setTitle}
+                    setPostContent={setContent}
+                    setPostId={setId}/>}
         </div>
         <PostForm authorId={userId} getPosts={getPosts} setUserPosts={setUserPosts}/>
     </main> 
