@@ -1,6 +1,10 @@
 "use client"
 
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { motion } from "framer-motion";
 const UPDATE_URL = "/api/posts/update/";
 const DISPLAY_URL = "/api/posts/display/";
 
@@ -67,19 +71,23 @@ const handleContent = (e) => {
 };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2 items-center w-full ">
-      {error && <p className="text-red-500">error!!!</p>}
-      <div className="flex flex-col gap-2 items-center w-full">
-        <label htmlFor="title">Title</label>
-        <input className="text-black w-[500px]" onChange={handleTitle} type="text" name="title" value={title} required/>
-      </div>
-      <div className="flex flex-col gap-2 items-center w-full">
-        <label htmlFor="content">Content</label>
-        <textarea className="text-black w-[500px] h-[250px]" onChange={handleContent} type="text" name="content" placeholder="Write your post here..." value={content} required/>
-      </div>
-      <button className=' w-1/4 border border-white text-white rounded h-12 hover:bg-white hover:text-black hover:border-black:'>{loading ? "...loading" : "Submit"}</button>
-      <button className=' w-1/4 border border-white text-white rounded h-12 hover:bg-white hover:text-black hover:border-black:' onClick={() => setUpdate(!update)}>X</button>
-    </form>
+    <motion.form 
+    initial={{ y: -300, opacity: 0 }}
+    animate={{ y: 0, opacity: 1, duration: 0.5 }}
+    exit={{ y: 300, opacity: 0 }}
+      onSubmit={handleSubmit} className="flex flex-col gap-2 items-center w-full ">
+        {error && <p className="text-red-500">error!!!</p>}
+        <div className="flex flex-col gap-2 items-center w-full">
+          <label htmlFor="title">Title</label>
+          <Input className="text-black w-[500px] focus:ring-1" onChange={handleTitle} type="text" name="title" value={title} required/>
+        </div>
+        <div className="flex flex-col gap-2 items-center w-full">
+          <label htmlFor="content">Content</label>
+          <Textarea className="text-black w-[500px] h-[250px] focus:ring" onChange={handleContent} type="text" name="content" placeholder="Write your post here..." value={content} required/>
+        </div>
+        <Button >{loading ? "...loading" : "Submit"}</Button>
+        <Button size="icon" variant='destructive' onClick={() => setUpdate(!update)}>X</Button>
+    </motion.form>
   )
 }
 

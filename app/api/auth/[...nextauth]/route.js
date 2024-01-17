@@ -67,7 +67,7 @@ export const authOptions = {
                     },
                 };
                 },
-                jwt: ({ token, user }) => {
+            jwt: ({ token, user }) => {
                 console.log("JWT Callback", { token, user });
                 if (user) {
                     const u = user;

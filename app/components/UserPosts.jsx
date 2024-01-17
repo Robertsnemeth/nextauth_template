@@ -65,7 +65,7 @@ function UserPosts ( {
         :
         userPosts.length !==0 ? userPosts.map((post) => {
           return (
-            <div key={post.id}>
+            <div key={post.id} className="flex flex-col gap-2">
               <Post post={post} />
               <div>
               <button className="border border-red-500 text-red-500 rounded p-2 hover:bg-red-500 hover:text-white" onClick={() => handleDelete(post.id)}>Delete</button>

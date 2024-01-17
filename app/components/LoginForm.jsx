@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const LoginForm = () => {
 
@@ -55,18 +57,18 @@ const LoginForm = () => {
     }
 
   return (
-    <main>
+    <main className='w-full'>
         <form className='w-full flex flex-col gap-4 text-black' onSubmit={handleSubmit}>
             <div className='flex flex-col gap-2 w-full'>
                 <label htmlFor='email' className='text-sm font-bold'>Email Address</label>
                 {error && <p className='text-xs text-red'>{error}</p>}
-                <input onChange={handleEmail} name="email" value={email} type="email" placeholder="email@company.com" className={"rounded w-full h-12 p-3"}/>
+                <Input onChange={handleEmail} name="email" value={email} type="email" placeholder="email@company.com" className={"rounded w-full h-12 p-3"}/>
             </div>
             <div className='flex flex-col gap-2 w-full'>
                 <label htmlFor='password' className='text-sm font-bold'>Password</label>
-                <input onChange={handlePassword} name="password" value={password} type="password" placeholder="Password" className={"rounded w-full h-12 p-3"} required/>
+                <Input onChange={handlePassword} name="password" value={password} type="password" placeholder="Password" className={"rounded w-full h-12 p-3"} required/>
             </div>
-            <button className='border border-white text-white rounded w-full h-12 hover:bg-white hover:text-black hover:border-black:'>{loading ? "...loading" : "Sign In"}</button>
+            <Button>{loading ? "...loading" : "Sign In"}</Button>
         </form> 
     </main>
     )

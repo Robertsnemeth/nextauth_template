@@ -14,17 +14,17 @@ export default async function Home() {
   console.log(session);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen items-start justify-center p-5">
       {session ? 
-      <>
+      <div className='flex gap-2'>
       <LogoutButton/>
       <ProfileButton/>
-      </>
+      </div>
       :
-      <>
+      <div className='flex gap-2'>
       <LoginButton/>
       <RegisterButton/>
-      </>
+      </div>
       }
     </main>
   )

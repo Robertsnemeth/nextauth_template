@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@/components/ui/button";
 import { getProviders, signIn } from "next-auth/react"
 
 export default async function SignIn() {
@@ -12,7 +13,7 @@ export default async function SignIn() {
     return (
         <div className="flex gap-4">
         {Object.values(providers).map((provider) => ( provider.name !== "Sign in" &&
-            <button onClick={() => handleSignIn(provider.id)} className="border border-white p-2 rounded hover:bg-white hover:text-black" key={provider.name}>{provider.name}</button>
+            <Button onClick={() => handleSignIn(provider.id)} key={provider.name}>{provider.name}</Button>
         ))}
         </div>
     )

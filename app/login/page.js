@@ -1,13 +1,12 @@
-import Login from "../components/LoginForm";
-import Providers from "../components/Providers";
+import LoginWidget from "../components/LoginWidget";
+import { HomeButton } from "../components/buttons";
 
 const login = () => {
 
   return (
-    <main className="flex flex-col gap-5">
-        <h1>Login</h1>
-        <Login/>
-        <Providers/>
+    <main className="flex flex-col gap-5 items-center p-5">
+      <LoginWidget/>
+      <HomeButton/>
     </main>
   )
 }

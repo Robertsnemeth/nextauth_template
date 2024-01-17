@@ -1,9 +1,13 @@
 "use client"
 
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { motion } from "framer-motion";
 const DISPLAY_URL = "/api/posts/display/";
 
-const PostForm = ({ authorId, getPosts, setUserPosts }) => {
+const PostForm = ({ authorId, getPosts, setUserPosts, setAddPost, addPost }) => {
 
 const [ title, setTitle ] = useState("")
 const [ content, setContent ] = useState("")
@@ -37,6 +41,7 @@ async function handleSubmit(e) {
     }
     setTitle("");
     setContent("");
+    setAddPost(!addPost);
     getPosts(DISPLAY_URL, authorId)
       .then((posts) => {
         setUserPosts(posts);
@@ -60,18 +65,23 @@ const handleContent = (e) => {
 };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2 items-center w-full ">
-      {error && <p className="text-red-500">error!!!</p>}
-      <div className="flex flex-col gap-2 items-center w-full">
-        <label htmlFor="title">Title</label>
-        <input className="text-black w-[500px]" onChange={handleTitle} type="text" name="title" value={title} required/>
-      </div>
-      <div className="flex flex-col gap-2 items-center w-full">
-        <label htmlFor="content">Content</label>
-        <textarea className="text-black w-[500px] h-[250px]" onChange={handleContent} type="text" name="content" placeholder="Write your post here..." value={content} required/>
-      </div>
-      <button className=' w-1/4 border border-white text-white rounded h-12 hover:bg-white hover:text-black hover:border-black:'>{loading ? "...loading" : "Add Post"}</button>
-    </form>
+    <motion.form 
+      initial={{ y: 300, opacity: 0 }}
+      animate={{ y: 0, opacity: 1, duration: 0.5 }}
+      exit={{ y: -300, opacity: 0 }}
+      key={{ authorId}}
+      onSubmit={handleSubmit} className="flex flex-col gap-2 items-center w-[500px]">
+        {error && <p className="text-red-500">error!!!</p>}
+        <div className="flex flex-col gap-2 items-start w-full">
+          <label htmlFor="title">Title</label>
+          <Input className="text-black" onChange={handleTitle} type="text" name="title" value={title} required/>
+        </div>
+        <div className="flex flex-col gap-2 items-start w-full">
+          <label htmlFor="content">Content</label>
+          <Textarea className="text-black h-[250px]" onChange={handleContent} type="text" name="content" placeholder="Write your post here..." value={content} required/>
+        </div>
+        <Button >{loading ? "...loading" : "Add Post"}</Button>
+    </motion.form>
   )
 }
 

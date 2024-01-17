@@ -1,7 +1,9 @@
 "use client" 
 
+import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+const REGISTER_URL = "/api/user/register";
 
 const Register = () => {
 
@@ -21,7 +23,7 @@ const Register = () => {
             password,
         }
         try {
-            const res = await fetch("/api/user/register", {
+            const res = await fetch(`${REGISTER_URL}`, {
                 method: "POST",
                 body: JSON.stringify(userData),
                 headers: {
@@ -83,7 +85,7 @@ const Register = () => {
             {/* {passError && <p className='text-xs text-primary-tomato'>Passwords do not match</p>} */}
             <input onChange={handleConfirmPassword} name="confirmPassword" value={confirmPassword} type="password" placeholder="Confirm Password" className={"rounded w-full h-12 p-3"} required/>
         </div>
-        <button className='border border-white text-white rounded w-full h-12 hover:bg-white hover:text-black hover:border-black:'>{loading ? "...loading" : "Sign Up"}</button>
+        <Button>{loading ? "...loading" : "Sign Up"}</Button>
     </form>   
     )
 }
