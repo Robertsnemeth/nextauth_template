@@ -4,6 +4,8 @@ import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { ColorRing } from 'react-loader-spinner';
 import Post from "./Post";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 const DISPLAY_URL = "/api/posts/display/";
 const DELETE_URL = "/api/posts/delete/"
 
@@ -65,13 +67,19 @@ function UserPosts ( {
         :
         userPosts.length !==0 ? userPosts.map((post) => {
           return (
-            <div key={post.id} className="flex flex-col gap-2">
+            <motion.div 
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, duration: 0.5 }}
+            exit={{ y: 50, opacity: 0 }}
+              key={post.id} className="flex flex-col gap-2">
               <Post post={post} />
               <div>
-              <button className="border border-red-500 text-red-500 rounded p-2 hover:bg-red-500 hover:text-white" onClick={() => handleDelete(post.id)}>Delete</button>
-              <button className="border border-blue-500 text-blue-500 rounded p-2 hover:bg-blue-500 hover:text-white" onClick={() => handleEdit(post.title, post.content, post.id)}>Edit</button>
+              <div className="flex gap-2">
+                <Button variant="ghost" onClick={() => handleDelete(post.id)}>Delete</Button>
+                <Button variant="ghost" onClick={() => handleEdit(post.title, post.content, post.id)}>Edit</Button>
               </div>
-            </div>
+              </div>
+            </motion.div>
           )
         })
         :

@@ -17,7 +17,6 @@ export default async function ProfilePage() {
     return (
         <main className="flex min-h-screen flex-col gap-2 items-center w-screen p-10">
             <Profile user={user}/>
-            <HomeButton/>
         </main>
     );
 }
