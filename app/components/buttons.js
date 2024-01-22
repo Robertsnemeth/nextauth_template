@@ -7,7 +7,7 @@ import Link from "next/link";
 export const LoginButton = () => {
   return (
     <Link className="mr-[10px]" href="/login">
-      <Button>Login</Button>
+      <Button variant="ghost">Login</Button>
     </Link>
   );
 };
@@ -15,21 +15,21 @@ export const LoginButton = () => {
 export const RegisterButton = () => {
   return (
     <Link href="/register" className="mr-[10px]" >
-      <Button>Register</Button>
+      <Button variant="ghost">Register</Button>
     </Link>
   );
 };
 
 export const LogoutButton = () => {
   return (
-    <Button  onClick={() => signOut()}>
+    <Button variant="ghost"  onClick={() => signOut()}>
       Sign Out
     </Button>
   );
 };
 
 export const ProfileButton = () => {
-  return <Link href="/profile"><Button>Profile</Button></Link>;
+  return <Link href="/profile"><Button variant="ghost">Profile</Button></Link>;
 };
 
 export const HomeButton = () => {

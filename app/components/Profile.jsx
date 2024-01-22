@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import PostForm from "../components/PostForm";
-import UserPosts from "../components/UserPosts";
-import PostUpdateForm from "../components/PostUpdateForm";
+import PostForm from "./Post/PostForm";
+import UserPosts from "./Post/UserPosts";
+import PostUpdateForm from "./Post/PostUpdateForm";
 import { getPosts } from '../actions/getPosts'
 import { Button } from '@/components/ui/button';
 
